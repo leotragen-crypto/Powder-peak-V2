@@ -1863,7 +1863,7 @@ const hasP2P=()=>!P2P_BLOCKED&&typeof window.Peer==='function';
 /* Peer-to-peer fallback (no sign-in): host holds the game, everyone connects to the host, host relays the roster. */
 const BAKED_TURN='https://pwdrpeak.metered.live/api/v1/turn/credentials?apiKey=f6fd6e2854ede9b31e00f978f9a882ffd41e';
 let ICE=[];
-function setTurnState(ice){const el2=$('turnState');if(!el2)return;el2.textContent=!/^https:\/\//.test(TURN_URL)?'Optional · helps on strict wifi':ice&&ice.relay?'Relay ready':ice&&ice.failed?'Relay link did not answer. Check it and try again.':'Relay saved';}
+function setTurnState(ice){const el2=$('turnState');if(!el2)return;el2.textContent=!/^https:\/\//.test(TURN_URL)?'Optional · helps on strict wifi':ice&&ice.relay?'Relay ready':ice&&ice.failed?'Relay link did not answer. Check it and try again.':TURN_URL===BAKED_TURN?'Relay built in ✓ (nothing to paste)':'Relay saved';}
 let TURN_URL=BAKED_TURN;try{TURN_URL=localStorage.getItem('pp-turn')||BAKED_TURN;}catch(e){}
 async function iceServers(){
   const list=[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun1.l.google.com:19302'}];
